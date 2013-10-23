@@ -23,42 +23,8 @@ body {
 }
 
 #grid {
-  width: 600px;
-  height: 600px;
   margin: 0 auto;
   background: #000
-}
-
-#grid li {
-  overflow: hidden
-}
-
-#grid li#surface {
-  height: 25px
-}
-
-#grid li#beneathSurface {
-  height: 100px
-}
-
-#grid li#topMiddle {
-  height: 75px
-}
-
-#grid li#middle {
-  height: 125px
-}
-
-#grid li#deepMiddle {
-  height: 75px
-}
-
-#grid li#deep {
-  height: 100px
-}
-
-#grid li#hell {
-  height: 100px
 }
 
 #grid li p {
