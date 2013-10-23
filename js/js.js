@@ -30,7 +30,7 @@ var Generate = (function(_){
       
       for (var i in blockDensity) {
       
-        blockDensity[i] = options[i]
+        blockDensity[i] = options[i] || 0
         
         for (var j=0; j<blockDensity[i]; j++) {
           layer.push(i)
@@ -46,85 +46,61 @@ var Generate = (function(_){
       surface: {
         blocks: generateLayer({
           surface   : 950,
-          dirt      : 0,
           stone     : 40,
           coal      : 10,
-          iron      : 0,
-          gold      : 0,
-          diamond   : 0,
-          lava      : 0
         }),
         depth: 25
       },
       beneathSurface: {
         blocks: generateLayer({
-          surface   : 0,
           dirt      : 750,
           stone     : 200,
           coal      : 50,
-          iron      : 0,
-          gold      : 0,
-          diamond   : 0,
-          lava      : 0
         }),
         depth: 100
       },
       topMiddle: {
         blocks: generateLayer({
-          surface   : 0,
           dirt      : 500,
           stone     : 400,
           coal      : 90,
           iron      : 10,
-          gold      : 0,
-          diamond   : 0,
-          lava      : 0
         }),
         depth: 75
       },
       middle: {
         blocks: generateLayer({
-          surface   : 0,
           dirt      : 250,
           stone     : 600,
           coal      : 100,
           iron      : 35,
-          gold      : 0,
-          diamond   : 0,
           lava      : 15
         }),
         depth: 125
       },
       deepMiddle: {
         blocks: generateLayer({
-          surface   : 0,
           dirt      : 70,
           stone     : 690,
           coal      : 120,
           iron      : 70,
-          gold      : 0,
-          diamond   : 0,
           lava      : 50
         }),
         depth: 75
       },
       deep: {
         blocks: generateLayer({
-          surface   : 0,
           dirt      : 25,
           stone     : 475,
           coal      : 150,
           iron      : 100,
           gold      : 50,
-          diamond   : 0,
           lava      : 200
         }),
         depth: 100
       },
       hell: {
         blocks: generateLayer({
-          surface   : 0,
-          dirt      : 0,
           stone     : 45,
           coal      : 250,
           iron      : 200,
