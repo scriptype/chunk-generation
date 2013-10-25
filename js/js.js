@@ -5,10 +5,21 @@ var Generate = (function(_){
     chunkWidth    = 1000,
     chunkHeight   = 600,
     blockVolume   = 25,
-    matrixVolume  =
-      (chunkWidth / blockVolume) *
-      (chunkHeight / blockVolume),
-    grid          = _("#grid"),
+    horizontal		= chunkWidth / blockVolume,
+    vertical			= chunkHeight / blockVolume,
+    matrixVolume  = horizontal * vertical,
+    canvas				= document.getElementById("chunk"),
+    chunk					= canvas.getContext('2d'),
+    path          = "img/",
+    x = y 				= blockVolume*(-1);
+    
+    generateBlock = function(blockType){
+    
+      var block = new Image();
+      block.src = path+blockType+".png";
+      return block
+    
+    },
     
     generateLayer = function(options){
     
@@ -111,12 +122,7 @@ var Generate = (function(_){
         depth: 100
       },
     };
-    
-    grid.css({
-      width : chunkWidth,
-      height: chunkHeight
-    })
-    
+	
     for (var i in layers) {
     
       layers[i]["dom"] = _("#"+i)
@@ -124,12 +130,18 @@ var Generate = (function(_){
       for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
       
         var
-          d       = Math.random()*999,
-          d       = Math.round(d),
-          block   = layers[i]["blocks"][d],
-          element = layers[i]["dom"];
+          d       	= Math.random() * (layers[i]["blocks"].length - 1),
+          d       	= Math.round(d),
+          block   	= layers[i]["blocks"][d],
+          element 	= layers[i]["dom"];
+          
+        if (j % horizontal === 0) {
+					y += blockVolume
+					x =  blockVolume * (-1)
+				}
+        x+=blockVolume;
         
-        element.append("<p class='"+block+"'></p>")
+        chunk.drawImage(generateBlock(block), x, y)
       
       }
     
