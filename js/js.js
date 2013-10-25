@@ -138,7 +138,7 @@ var Generate = (function(_){
         if (j % horizontal === 0) {
           y += blockVolume
           x =  blockVolume * (-1)
-				}
+        }
         x+=blockVolume;
         
         chunk.drawImage(generateBlock(block), x, y)
