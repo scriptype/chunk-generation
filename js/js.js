@@ -2,16 +2,16 @@ var Generate = (function(_){
 
   var
   
-    chunkWidth    = 1000,
-    chunkHeight   = 600,
-    blockVolume   = 25,
+    chunkWidth		= 1000,
+    chunkHeight		= 600,
+    blockVolume		= 25,
     horizontal		= chunkWidth / blockVolume,
     vertical			= chunkHeight / blockVolume,
-    matrixVolume  = horizontal * vertical,
+    matrixVolume	= horizontal * vertical,
     canvas				= document.getElementById("chunk"),
     chunk					= canvas.getContext('2d'),
-    path          = "img/",
-    x = y 				= blockVolume*(-1);
+    path					= "img/",
+    x = y					= blockVolume*(-1);
     
     generateBlock = function(blockType){
     
@@ -130,10 +130,10 @@ var Generate = (function(_){
       for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
       
         var
-          d       	= Math.random() * (layers[i]["blocks"].length - 1),
-          d       	= Math.round(d),
-          block   	= layers[i]["blocks"][d],
-          element 	= layers[i]["dom"];
+          d					= Math.random() * (layers[i]["blocks"].length - 1),
+          d					= Math.round(d),
+          block			= layers[i]["blocks"][d],
+          element		= layers[i]["dom"];
           
         if (j % horizontal === 0) {
 					y += blockVolume
