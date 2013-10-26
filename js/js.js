@@ -127,25 +127,28 @@ var Generate = (function(_){
       },
     };
     
-    for (var i in layers) {
+    _(function(){
+      for (var i in layers) {
     
-      for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
-      
-        var
-          d         = Math.random() * (layers[i]["blocks"].length - 1),
-          d         = Math.round(d),
-          block     = layers[i]["blocks"][d];
-          
-        if (j % horizontal === 0) {
-          y += blockVolume
-          x =  blockVolume * (-1)
-        }
-        x+=blockVolume;
+        for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
         
-        chunk.drawImage(blockSource()[block], x, y)
-      
-      }
+          var
+            d         = Math.random() * (layers[i]["blocks"].length - 1),
+            d         = Math.round(d),
+            block     = layers[i]["blocks"][d];
+            
+          if (j % horizontal === 0) {
+            y += blockVolume
+            x =  blockVolume * (-1)
+          }
+          x+=blockVolume;
+          
+          chunk.drawImage(blockSource()[block], x, y)
+        
+        }
     
-    }
+      }
+
+    })
   
 })($)
