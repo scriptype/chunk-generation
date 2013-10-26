@@ -142,7 +142,7 @@ var Generate = (function(_){
         }
         x+=blockVolume;
         
-        chunk.drawImage(blockSource()[block], x, y, 25, 25)
+        chunk.drawImage(blockSource()[block], x, y)
       
       }
     
