@@ -21,7 +21,8 @@ var Generate = (function(_){
       "iron",
       "gold",
       "diamond",
-      "lava"
+      "lava",
+      "bedrock"
     ],
     
     blockSource = function() {
@@ -92,7 +93,7 @@ var Generate = (function(_){
           iron      : 35,
           lava      : 15
         }),
-        depth: 125
+        depth: 100
       },
       deepMiddle: {
         blocks: generateLayer({
@@ -113,17 +114,33 @@ var Generate = (function(_){
           gold      : 50,
           lava      : 200
         }),
-        depth: 100
+        depth: 75
       },
       hell: {
         blocks: generateLayer({
+          stone     : 48,
           coal      : 200,
           iron      : 150,
           gold      : 45,
-          diamond   : 5,
-          lava      : 600
+          diamond   : 7,
+          lava      : 550
         }),
         depth: 100
+      },
+      startBedrock: {
+        blocks: generateLayer({
+          stone     : 48,
+          diamond   : 2,
+          lava      : 450,
+          bedrock   : 500
+        }),
+        depth: 25
+      },
+      bedrock: {
+        blocks: generateLayer({
+          bedrock      : 1000
+        }),
+        depth: 25
       },
     };
     
