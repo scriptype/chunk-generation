@@ -22,45 +22,11 @@ body {
   vertical-align: middle
 }
 
-#grid {
+img {
+	display: none
+}
+
+#chunk {
   margin: 0 auto;
   background: #000
-}
-
-#grid li p {
-  float: left;
-  width: 25px;
-  height: 25px
-}
-
-#grid li p.surface {
-  background: url(../img/ores.png) -160px center no-repeat
-}
-
-#grid li p.dirt {
-  background: url(../img/ores.png) -81px center no-repeat
-}
-
-#grid li p.stone {
-  background: url(../img/ores.png) -54px center no-repeat
-}
-
-#grid li p.coal {
-  background: url(../img/ores.png) -133px center no-repeat
-}
-
-#grid li p.iron {
-  background: url(../img/ores.png) -187px center no-repeat
-}
-
-#grid li p.gold {
-  background: url(../img/ores.png) -27px center no-repeat
-}
-
-#grid li p.diamond {
-  background: url(../img/ores.png) left center no-repeat
-}
-
-#grid li p.lava {
-  background: url(../img/ores.png) -106px center no-repeat
 }

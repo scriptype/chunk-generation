@@ -1,43 +1,48 @@
 var Generate = (function(_){
 
   var
-  
-    chunkWidth    = 1000,
-    chunkHeight   = 600,
+    
+    canvas        = document.getElementById("chunk"),
+    chunk         = canvas.getContext('2d'),
+    chunkWidth    = canvas.width,
+    chunkHeight   = canvas.height,
     blockVolume   = 25,
     horizontal    = chunkWidth / blockVolume,
     vertical      = chunkHeight / blockVolume,
     matrixVolume  = horizontal * vertical,
-    canvas        = document.getElementById("chunk"),
-    chunk         = canvas.getContext('2d'),
     path          = "img/",
-    x = y         = blockVolume*(-1);
+    x = y         = blockVolume*(-1),
     
-    generateBlock = function(blockType){
+    blocks        = [
+      "surface",
+      "dirt",
+      "stone",
+      "coal",
+      "iron",
+      "gold",
+      "diamond",
+      "lava"
+    ],
     
-      var block = new Image();
-      block.src = path+blockType+".png";
-      return block
-    
+    blockSource = function() {
+      
+      var source = {}
+      for (var i=0; i < blocks.length; i++) {
+        source[blocks[i]] = document.getElementById(blocks[i])
+      }
+      return source
+      
     },
     
     generateLayer = function(options){
     
       var
-      
-        blockDensity = {
-          surface   : 0,
-          dirt      : 0,
-          stone     : 0,
-          coal      : 0,
-          iron      : 0,
-          gold      : 0,
-          diamond   : 0,
-          lava      : 0
-        },
-        
+        blockDensity = {},
         layer = [];
-      
+        
+      for (var i=0; i < blocks.length; i++) {
+        blockDensity[blocks[i]] = 0
+      }
       
       for (var i in blockDensity) {
       
@@ -64,9 +69,9 @@ var Generate = (function(_){
       },
       beneathSurface: {
         blocks: generateLayer({
-          dirt      : 750,
-          stone     : 200,
-          coal      : 50,
+          dirt      : 850,
+          stone     : 125,
+          coal      : 25,
         }),
         depth: 100
       },
@@ -112,28 +117,24 @@ var Generate = (function(_){
       },
       hell: {
         blocks: generateLayer({
-          stone     : 45,
-          coal      : 250,
-          iron      : 200,
-          gold      : 100,
+          coal      : 200,
+          iron      : 150,
+          gold      : 45,
           diamond   : 5,
-          lava      : 400
+          lava      : 600
         }),
         depth: 100
       },
     };
-	
-    for (var i in layers) {
     
-      layers[i]["dom"] = _("#"+i)
+    for (var i in layers) {
     
       for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
       
         var
           d         = Math.random() * (layers[i]["blocks"].length - 1),
           d         = Math.round(d),
-          block     = layers[i]["blocks"][d],
-          element   = layers[i]["dom"];
+          block     = layers[i]["blocks"][d];
           
         if (j % horizontal === 0) {
           y += blockVolume
@@ -141,7 +142,7 @@ var Generate = (function(_){
         }
         x+=blockVolume;
         
-        chunk.drawImage(generateBlock(block), x, y)
+        chunk.drawImage(blockSource()[block], x, y, 25, 25)
       
       }
     
