@@ -1,5 +1,7 @@
 var Generate = (function(_){
 
+  _("#container").append("<div id='load'>Generating Chunk</div>");
+
   var
     
     canvas        = document.getElementById("chunk"),
@@ -12,6 +14,8 @@ var Generate = (function(_){
     matrixVolume  = horizontal * vertical,
     path          = "img/",
     x = y         = blockVolume*(-1),
+    imgLoaded     = 0,
+    blockSource   = {},
     
     blocks        = [
       "surface",
@@ -24,16 +28,6 @@ var Generate = (function(_){
       "lava",
       "bedrock"
     ],
-    
-    blockSource = function() {
-      
-      var source = {}
-      for (var i=0; i < blocks.length; i++) {
-        source[blocks[i]] = document.getElementById(blocks[i])
-      }
-      return source
-      
-    },
     
     generateLayer = function(options){
     
@@ -118,12 +112,12 @@ var Generate = (function(_){
       },
       hell: {
         blocks: generateLayer({
-          stone     : 48,
-          coal      : 200,
-          iron      : 150,
+          stone     : 146,
+          coal      : 225,
+          iron      : 175,
           gold      : 45,
-          diamond   : 7,
-          lava      : 550
+          diamond   : 9,
+          lava      : 400
         }),
         depth: 100
       },
@@ -142,30 +136,51 @@ var Generate = (function(_){
         }),
         depth: 25
       },
-    };
+    },
     
-    _(function(){
-      for (var i in layers) {
+    render = function(){
     
-        for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
+      if ( blocks.length === ++imgLoaded ) {
+      
+        _("#load").remove();
         
-          var
-            d         = Math.random() * (layers[i]["blocks"].length - 1),
-            d         = Math.round(d),
-            block     = layers[i]["blocks"][d];
-            
-          if (j % horizontal === 0) {
-            y += blockVolume
-            x =  blockVolume * (-1)
-          }
-          x+=blockVolume;
+        for (var i in layers) {
+      
+          for (var j=0; j<matrixVolume / (chunkHeight / layers[i]["depth"]) ; j++) {
           
-          chunk.drawImage(blockSource()[block], x, y)
-        
+            var
+              d         = Math.random() * (layers[i]["blocks"].length - 1),
+              d         = Math.round(d),
+              block     = layers[i]["blocks"][d];
+              
+            if (j % horizontal === 0) {
+              y += blockVolume
+              x =  blockVolume * (-1)
+            }
+            x+=blockVolume;
+            
+            chunk.drawImage(blockSource[block], x, y)
+          
+          }
+      
         }
-    
+      
       }
 
-    })
+    },
+    
+    setSources  = function() {
+      
+      for (var i=0; i < blocks.length; i++) {
+        blockSource[blocks[i]] = new Image();
+        blockSource[blocks[i]].src = path + blocks[i] + ".png";
+        blockSource[blocks[i]].onload = render
+      }
+      
+    };
+    
+    // INIT
+    
+    setSources();
   
 })($)

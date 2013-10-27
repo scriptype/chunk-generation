@@ -22,11 +22,24 @@ body {
   vertical-align: middle
 }
 
-img {
-	display: none
+div#container {
+  width: 1000px;
+  height: 600px;
+  margin: 0 auto;
+  background: #000;
+  position: relative
 }
 
-#chunk {
-  margin: 0 auto;
-  background: #000
+div#load {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  text-align: center;
+  line-height: 600px;
+  font-size: 24px;
+  background: #44c;
+  color: #fff;
+  font-family: "Courier New"
 }
